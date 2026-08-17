@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "china-phone-checker",
+  "compatibility_date": "2026-08-17",
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS"
+  }
+}
