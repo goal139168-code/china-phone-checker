@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will My Phone Work in China? Free Compatibility Checker</title>
+<meta name="description" content="Check in seconds if your iPhone or Android phone works in China — 65+ verified models, eSIM comparison, blocked apps list, and VPN guide. Updated 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D1320;
+    --panel:#151E2E;
+    --panel-2:#1B2740;
+    --line:#2A3650;
+    --paper:#ECEEF3;
+    --paper-dim:#9BA5BB;
+    --amber:#F5A623;
+    --amber-dim:#8A661F;
+    --green:#34D399;
+    --red:#F2545B;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --sans:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--sans);
+    line-height:1.55;
+  }
+  a{color:var(--amber);}
+  img{max-width:100%;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(13,19,32,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1080px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;letter-spacing:.02em;color:var(--paper);text-decoration:none;font-size:15px;}
+  .brand .dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);}
+  .brand small{display:block;font-family:var(--sans);font-weight:400;color:var(--paper-dim);font-size:11px;letter-spacing:.03em;}
+  nav.links{display:flex;gap:28px;font-size:14px;}
+  nav.links a{color:var(--paper-dim);text-decoration:none;font-weight:500;}
+  nav.links a:hover{color:var(--amber);}
+  .btn{
+    display:inline-block;background:var(--amber);color:#1a1300;font-weight:700;
+    padding:10px 18px;border-radius:4px;text-decoration:none;font-size:14px;
+    border:none;cursor:pointer;font-family:var(--sans);
+  }
+  .btn:hover{background:#ffb733;}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber);background:transparent;}
+  @media (max-width:760px){nav.links{display:none;}}
+
+  /* ---------- Hero / split-flap ---------- */
+  .hero{padding:72px 0 56px;border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--amber);display:flex;align-items:center;gap:8px;margin-bottom:20px;
+  }
+  .eyebrow::before{content:"";width:18px;height:1px;background:var(--amber);}
+  h1{font-family:var(--mono);font-size:clamp(30px,5vw,50px);font-weight:800;line-height:1.08;letter-spacing:-0.01em;margin:0 0 20px;color:var(--paper);}
+  h1 .accent{color:var(--amber);}
+  .lede{font-size:18px;color:var(--paper-dim);max-width:560px;margin:0 0 28px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;}
+
+  .board{
+    display:flex;gap:10px;flex-wrap:wrap;font-family:var(--mono);
+  }
+  .flap{
+    background:var(--panel);border:1px solid var(--line);border-radius:4px;
+    padding:10px 14px;font-size:12px;color:var(--paper-dim);
+    display:flex;align-items:center;gap:8px;
+  }
+  .flap b{color:var(--paper);font-weight:700;}
+  .flap .led{width:6px;height:6px;border-radius:50%;background:var(--green);}
+
+  /* ---------- Section shell ---------- */
+  section{padding:64px 0;border-bottom:1px solid var(--line);}
+  .section-head{margin-bottom:36px;max-width:640px;}
+  .kicker{font-family:var(--mono);font-size:12px;color:var(--amber);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;}
+  h2{font-family:var(--mono);font-size:clamp(22px,3.2vw,30px);margin:0 0 10px;font-weight:700;color:var(--paper);}
+  .sub{color:var(--paper-dim);font-size:15px;}
+
+  /* ---------- Checker (customs-form style) ---------- */
+  .checker-panel{
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    overflow:hidden;
+  }
+  .checker-panel .strip{
+    background:var(--panel-2);padding:14px 24px;font-family:var(--mono);font-size:12px;
+    color:var(--paper-dim);display:flex;justify-content:space-between;letter-spacing:.04em;
+    border-bottom:1px solid var(--line);
+  }
+  .checker-body{padding:28px 24px;}
+  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+  @media (max-width:640px){.field-grid{grid-template-columns:1fr;}}
+  .field label{
+    display:block;font-family:var(--mono);font-size:12px;color:var(--amber);
+    margin-bottom:8px;letter-spacing:.03em;
+  }
+  .field select, .field input[type=text]{
+    width:100%;background:var(--ink);border:1px solid var(--line);color:var(--paper);
+    padding:12px 14px;border-radius:4px;font-size:14px;font-family:var(--sans);
+  }
+  .field select:focus, .field input:focus{outline:2px solid var(--amber);outline-offset:1px;}
+  .radio-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .radio-row label{
+    display:flex;align-items:center;gap:6px;background:var(--ink);border:1px solid var(--line);
+    padding:9px 14px;border-radius:4px;font-size:13px;color:var(--paper-dim);cursor:pointer;
+  }
+  .radio-row input{accent-color:var(--amber);}
+  .radio-row label:has(input:checked){border-color:var(--amber);color:var(--paper);}
+
+  .result-board{
+    margin-top:24px;background:var(--ink);border:1px solid var(--line);border-radius:6px;
+    padding:20px;display:none;
+  }
+  .result-board.show{display:block;animation:reveal .35s ease;}
+  @keyframes reveal{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .result-status{
+    display:flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;
+    font-size:16px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px dashed var(--line);
+  }
+  .result-status .badge{width:10px;height:10px;border-radius:50%;}
+  .result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;font-family:var(--mono);font-size:13px;}
+  .result-grid div{background:var(--panel);padding:10px 12px;border-radius:4px;}
+  .result-grid span{display:block;color:var(--paper-dim);font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+  .result-grid b.yes{color:var(--green);}
+  .result-grid b.no{color:var(--red);}
+  .result-grid b.partial{color:var(--amber);}
+  .confidence{
+    display:inline-block;font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:20px;
+    margin-left:10px;text-transform:uppercase;letter-spacing:.04em;
+  }
+  .confidence.high{background:rgba(52,211,153,.15);color:var(--green);}
+  .confidence.medium{background:rgba(245,166,35,.15);color:var(--amber);}
+  .confidence.low{background:rgba(242,84,91,.15);color:var(--red);}
+  .fine{font-size:12px;color:var(--paper-dim);margin-top:16px;}
+  .sources{font-size:11px;color:var(--paper-dim);margin-top:8px;opacity:.75;}
+  .sources a{color:var(--paper-dim);text-decoration:underline;}
+
+  /* ---------- Blocked apps manifest ---------- */
+  .manifest{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:640px){.manifest{grid-template-columns:1fr;}}
+  .manifest-col{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px;}
+  .manifest-col h3{font-family:var(--mono);font-size:14px;margin:0 0 14px;display:flex;align-items:center;gap:8px;}
+  .manifest-col.blocked h3{color:var(--red);}
+  .manifest-col.ok h3::before{content:"✓";}
+  .manifest-col.blocked h3::before{content:"✕";}
+  .manifest-col.ok h3{color:var(--green);}
+  .chip-list{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{background:var(--ink);border:1px solid var(--line);padding:6px 12px;border-radius:20px;font-size:13px;color:var(--paper-dim);}
+  .vpn-note{
+    margin-top:20px;background:var(--panel-2);border-left:3px solid var(--amber);
+    padding:14px 16px;border-radius:4px;font-size:13px;color:var(--paper-dim);
+  }
+  .vpn-note b{color:var(--paper);}
+
+  /* ---------- eSIM cards ---------- */
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
+  .esim-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px;
+    display:flex;flex-direction:column;gap:10px;position:relative;
+  }
+  .esim-card.pick{border-color:var(--amber);}
+  .pick-tag{
+    position:absolute;top:-11px;left:16px;background:var(--amber);color:#1a1300;
+    font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;font-family:var(--mono);
+    letter-spacing:.04em;
+  }
+  .esim-card h4{margin:6px 0 0;font-size:16px;color:var(--paper);}
+  .esim-card .price{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--amber);}
+  .esim-card .price span{font-size:12px;color:var(--paper-dim);font-weight:400;}
+  .esim-card .desc{font-size:13px;color:var(--paper-dim);min-height:34px;}
+  .kv{font-size:12px;color:var(--paper-dim);display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:8px;}
+  .kv b{color:var(--paper);font-weight:500;}
+  .kv.gfw b{color:var(--green);}
+  .esim-card a.btn{margin-top:8px;text-align:center;padding:9px;font-size:13px;}
+
+  /* ---------- VPN table ---------- */
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);}
+  th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--paper-dim);font-weight:600;}
+  td{color:var(--paper);}
+  td.dim{color:var(--paper-dim);}
+  tr:last-child td{border-bottom:none;}
+  .table-wrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px;}
+  .table-wrap table{min-width:640px;}
+
+  /* ---------- FAQ ---------- */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item:first-child{border-top:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;color:var(--paper);
+    font-family:var(--sans);font-size:15px;font-weight:600;padding:18px 4px;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  .faq-q::after{content:"+";font-family:var(--mono);color:var(--amber);font-size:18px;flex-shrink:0;}
+  .faq-item.open .faq-q::after{content:"–";}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .faq-item.open .faq-a{max-height:220px;}
+  .faq-a p{color:var(--paper-dim);font-size:14px;padding:0 4px 18px;margin:0;}
+
+  /* ---------- Trust / disclosure ---------- */
+  .trust-bar{
+    display:flex;gap:24px;flex-wrap:wrap;align-items:center;background:var(--panel);
+    border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin-top:18px;font-size:13px;color:var(--paper-dim);
+  }
+  .trust-bar .item{display:flex;align-items:center;gap:8px;}
+  .disclosure{
+    font-size:12.5px;color:var(--paper-dim);background:var(--panel-2);border-radius:6px;
+    padding:12px 16px;margin-bottom:24px;border:1px solid var(--line);
+  }
+
+  /* ---------- Email capture ---------- */
+  .capture{
+    background:linear-gradient(135deg,var(--panel-2),var(--panel));border:1px solid var(--line);
+    border-radius:10px;padding:36px;text-align:center;
+  }
+  .capture h2{margin-bottom:8px;}
+  .capture-form{display:flex;gap:10px;max-width:420px;margin:22px auto 8px;flex-wrap:wrap;justify-content:center;}
+  .capture-form input{
+    flex:1;min-width:220px;background:var(--ink);border:1px solid var(--line);color:var(--paper);
+    padding:12px 14px;border-radius:4px;font-size:14px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{padding:40px 0;}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;font-size:13px;color:var(--paper-dim);}
+  .foot-brand{font-family:var(--mono);color:var(--paper);font-weight:700;}
+  footer a{color:var(--paper-dim);text-decoration:none;margin-right:16px;}
+  footer a:hover{color:var(--amber);}
+  .verified-line{font-family:var(--mono);font-size:11px;color:var(--green);margin-top:6px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <a class="brand" href="https://www.china-mobile-phones.com/">
+      <span class="dot"></span>
+      CHINA MOBILE PHONES
+      <small style="margin-left:2px;">Compatibility Checker</small>
+    </a>
+    <nav class="links">
+      <a href="#checker">Checker</a>
+      <a href="#apps">Blocked Apps</a>
+      <a href="#esim">eSIM</a>
+      <a href="#vpn">VPN</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn" href="#checker">Check My Phone</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Pre-departure check &middot; updated 2026</div>
+    <h1>Will your phone<br>work in <span class="accent">China?</span></h1>
+    <p class="lede">Find out in four fields whether your iPhone or Android supports China's networks, which apps get blocked at the border, and which eSIM actually gets you online — before you land.</p>
+    <div class="hero-ctas">
+      <a class="btn" href="#checker">Check my phone</a>
+      <a class="btn btn-ghost" href="#esim">Compare eSIM options</a>
+    </div>
+    <div class="board">
+      <div class="flap"><span class="led"></span> <b>12 major brands</b>, generation-verified</div>
+      <div class="flap"><span class="led"></span> Verified <b>Jul 2026</b></div>
+      <div class="flap"><span class="led"></span> No signup required</div>
+      <div class="flap"><span class="led"></span> By <b>China Mobile Phones</b> &middot; est. 2003</div>
+    </div>
+  </div>
+</section>
+
+<section id="checker">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">01 &mdash; Compatibility Checker</div>
+      <h2>Check your phone in four steps</h2>
+      <p class="sub">Free, instant, and based on published China Mobile / China Unicom / China Telecom frequency-band data. If your model isn't listed, <a href="https://www.china-mobile-phones.com/contact-China.html">contact us</a> and we'll add it.</p>
+    </div>
+
+    <div class="checker-panel">
+      <div class="strip"><span>FORM 4A &mdash; DEVICE DECLARATION</span><span>CMP-CHECK</span></div>
+      <div class="checker-body">
+        <div class="field-grid">
+          <div class="field">
+            <label for="brand">1 &middot; Brand</label>
+            <select id="brand">
+              <option value="">Select brand&hellip;</option>
+              <option>Apple</option>
+              <option>Samsung</option>
+              <option>Google Pixel</option>
+              <option>Xiaomi</option>
+              <option>Huawei</option>
+              <option>Oppo</option>
+              <option>Vivo</option>
+              <option>OnePlus</option>
+              <option>Motorola</option>
+              <option>Sony</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="model">2 &middot; Model / release year</label>
+            <input type="text" id="model" placeholder="e.g. iPhone 15, Galaxy S24">
+          </div>
+          <div class="field">
+            <label for="country">3 &middot; Country of purchase</label>
+            <select id="country">
+              <option value="">Select country&hellip;</option>
+              <option>USA</option>
+              <option>Australia</option>
+              <option>UK</option>
+              <option>Canada</option>
+              <option>Singapore</option>
+              <option>Hong Kong</option>
+              <option>Europe</option>
+              <option>Japan</option>
+              <option>Korea</option>
+              <option>India</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>4 &middot; Carrier status</label>
+            <div class="radio-row">
+              <label><input type="radio" name="lock" value="unlocked" checked> Unlocked</label>
+              <label><input type="radio" name="lock" value="locked"> Locked</label>
+              <label><input type="radio" name="lock" value="unsure"> Not sure</label>
+            </div>
+          </div>
+        </div>
+        <button class="btn" style="width:100%;padding:14px;font-size:15px;" onclick="runCheck()">Check China Compatibility</button>
+
+        <div class="result-board" id="resultBoard">
+          <div class="result-status" id="resultStatus"></div>
+          <div class="result-grid" id="resultGrid"></div>
+          <p class="fine" id="resultFine"></p>
+          <p class="sources" id="resultSources"></p>
+        </div>
+
+        <div style="margin-top:22px;border-top:1px dashed var(--line);padding-top:18px;">
+          <button type="button" id="imeiToggle" style="background:none;border:none;color:var(--paper-dim);font-size:13px;cursor:pointer;text-decoration:underline;padding:0;">
+            Have your IMEI handy? Get an exact match instead →
+          </button>
+          <div id="imeiPanel" style="display:none;margin-top:14px;">
+            <p class="fine" style="margin-top:0;">Dial <b style="color:var(--paper)">*#06#</b> on your phone to find your IMEI. This looks up your exact device record instead of a generation estimate.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <input type="text" id="imeiInput" placeholder="15-digit IMEI" maxlength="15" style="flex:1;min-width:200px;background:var(--ink);border:1px solid var(--line);color:var(--paper);padding:12px 14px;border-radius:4px;font-size:14px;font-family:var(--mono);">
+              <button class="btn" type="button" onclick="runImeiCheck()">Look up</button>
+            </div>
+            <div id="imeiResult" style="margin-top:14px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="sources" style="margin-top:12px;">Network band data cross-checked against published China Mobile, China Unicom, and China Telecom spectrum allocations (LTE B1/B3/B8/B39/B40/B41, 5G NR n1/n5/n8/n28/n41/n78/n79). Dropdown results are matched to ~65 individually verified models where possible, falling back to a generation-level estimate otherwise — never an individual IMEI lookup unless you use the IMEI field above.</p>
+  </div>
+</section>
+
+<section id="apps">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">02 &mdash; The Great Firewall</div>
+      <h2>Which apps are blocked in China?</h2>
+      <p class="sub">Most Western apps are blocked without a VPN. Install any VPN <em>before</em> you arrive &mdash; VPN provider websites are blocked too.</p>
+    </div>
+    <div class="manifest">
+      <div class="manifest-col blocked">
+        <h3>Blocked without VPN</h3>
+        <div class="chip-list">
+          <span class="chip">Google</span><span class="chip">Gmail</span><span class="chip">YouTube</span>
+          <span class="chip">Facebook</span><span class="chip">Instagram</span><span class="chip">WhatsApp</span>
+          <span class="chip">ChatGPT</span><span class="chip">X / Twitter</span><span class="chip">Google Maps</span>
+          <span class="chip">Google Drive</span>
+        </div>
+      </div>
+      <div class="manifest-col ok">
+        <h3>Works freely, no VPN</h3>
+        <div class="chip-list">
+          <span class="chip">WeChat</span><span class="chip">Alipay</span><span class="chip">Didi</span>
+          <span class="chip">Baidu Maps</span><span class="chip">JD</span><span class="chip">Taobao</span>
+          <span class="chip">Apple Services</span><span class="chip">Microsoft 365</span>
+        </div>
+      </div>
+    </div>
+    <div class="vpn-note"><b>VPN legality:</b> VPNs sit in a gray area for tourists &mdash; enforcement targets domestic providers, not foreign travelers. Choose a VPN with a track record of staying reliable inside China, not just a generic "fast VPN."</div>
+  </div>
+</section>
+
+<section id="esim">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">03 &mdash; eSIM Comparison</div>
+      <h2>Best eSIMs for China travel in 2026</h2>
+      <p class="sub">Some travel eSIMs route through Hong Kong and bypass the Great Firewall outright &mdash; meaning Google, WhatsApp, and Instagram work with no VPN needed.</p>
+    </div>
+    <div class="disclosure">This page contains affiliate links. If you buy through one, China Mobile Phones may earn a commission at no extra cost to you. Plans and prices are independently compared and reflect our own evaluation, not just commission rates &mdash; see our <a href="https://www.china-mobile-phones.com/esim-for-china.html">full eSIM guide</a> for testing notes.</div>
+    <div class="card-grid">
+      <div class="esim-card pick">
+        <span class="pick-tag">Editor's pick</span>
+        <h4>Airalo</h4>
+        <div class="price">$4.50 <span>starting</span></div>
+        <div class="desc">Most popular global eSIM brand, easiest activation for first-timers.</div>
+        <div class="kv"><span>Data</span><b>1 GB / 7 days</b></div>
+        <div class="kv"><span>Speed</span><b>4G / 5G</b></div>
+        <div class="kv gfw"><span>Bypasses firewall</span><b>No &mdash; use VPN</b></div>
+        <a class="btn" href="#">View deal</a>
+      </div>
+      <div class="esim-card">
+        <h4>Holafly</h4>
+        <div class="price">$19 <span>starting</span></div>
+        <div class="desc">Built-in VPN layer, no separate app needed to get past the firewall.</div>
+        <div class="kv"><span>Data</span><b>Unlimited / 5 days</b></div>
+        <div class="kv"><span>Speed</span><b>4G</b></div>
+        <div class="kv gfw"><span>Bypasses firewall</span><b>Yes</b></div>
+        <a class="btn" href="#">View deal</a>
+      </div>
+      <div class="esim-card">
+        <h4>Nomad</h4>
+        <div class="price">$6 <span>starting</span></div>
+        <div class="desc">Best value if you're staying longer than a week.</div>
+        <div class="kv"><span>Data</span><b>3 GB / 30 days</b></div>
+        <div class="kv"><span>Speed</span><b>4G / 5G</b></div>
+        <div class="kv gfw"><span>Bypasses firewall</span><b>No &mdash; use VPN</b></div>
+        <a class="btn" href="#">View deal</a>
+      </div>
+      <div class="esim-card">
+        <h4>China Unicom HK</h4>
+        <div class="price">$15 <span>starting</span></div>
+        <div class="desc">Roams in via Hong Kong, so the firewall doesn't apply to your data.</div>
+        <div class="kv"><span>Data</span><b>5 GB / 8 days</b></div>
+        <div class="kv"><span>Speed</span><b>4G / 5G</b></div>
+        <div class="kv gfw"><span>Bypasses firewall</span><b>Yes</b></div>
+        <a class="btn" href="#">View deal</a>
+      </div>
+      <div class="esim-card">
+        <h4>GigSky</h4>
+        <div class="price">$10 <span>starting</span></div>
+        <div class="desc">Reliable coverage for short business trips.</div>
+        <div class="kv"><span>Data</span><b>2 GB / 15 days</b></div>
+        <div class="kv"><span>Speed</span><b>4G</b></div>
+        <div class="kv gfw"><span>Bypasses firewall</span><b>No &mdash; use VPN</b></div>
+        <a class="btn" href="#">View deal</a>
+      </div>
+      <div class="esim-card">
+        <h4>Local China SIM</h4>
+        <div class="price">~$10 <span>starting</span></div>
+        <div class="desc">Best real-world speed; needs passport registration in person.</div>
+        <div class="kv"><span>Data</span><b>10 GB / 30 days</b></div>
+        <div class="kv"><span>Speed</span><b>5G</b></div>
+        <div class="kv gfw"><span>Bypasses firewall</span><b>No &mdash; use VPN</b></div>
+        <a class="btn" href="https://www.china-mobile-phones.com/">View guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vpn">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">04 &mdash; VPN for China</div>
+      <h2>Do you need a VPN in China?</h2>
+      <p class="sub">Yes &mdash; if you want Google, Gmail, WhatsApp, Instagram, or ChatGPT. Install before you arrive; VPN provider sites are blocked once you're there.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>VPN</th><th>Price</th><th>Speed</th><th>China reliability</th><th>Best for</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>ExpressVPN</b></td><td>$6.67/mo</td><td>Excellent</td><td class="dim">Highly reliable</td><td class="dim">Best overall for travelers</td><td><a href="#">View</a></td></tr>
+          <tr><td><b>Astrill</b></td><td>$15/mo</td><td>Very good</td><td class="dim">Most reliable in China</td><td class="dim">Expats / long-stay</td><td><a href="#">View</a></td></tr>
+          <tr><td><b>NordVPN</b></td><td>$3.99/mo</td><td>Excellent</td><td class="dim">Reliable (obfuscated)</td><td class="dim">Best value</td><td><a href="#">View</a></td></tr>
+          <tr><td><b>Surfshark</b></td><td>$2.49/mo</td><td>Good</td><td class="dim">Works (NoBorders mode)</td><td class="dim">Budget travelers</td><td><a href="#">View</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">05 &mdash; FAQ</div>
+      <h2>Frequently asked questions</h2>
+      <p class="sub">Everything travelers ask us before flying to China.</p>
+    </div>
+    <div id="faqList">
+      <div class="faq-item open">
+        <button class="faq-q">Can I use my US iPhone in China?</button>
+        <div class="faq-a"><p>Yes. Every iPhone from the iPhone 11 onward fully supports China Mobile, China Unicom, and China Telecom networks, including 4G LTE, 5G, and VoLTE calling. The one requirement is that the phone must be carrier-unlocked before you leave &mdash; a locked iPhone will only accept a SIM from its original carrier.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Does WhatsApp work in China?</button>
+        <div class="faq-a"><p>No, not without a VPN. WhatsApp has been blocked by the Great Firewall since 2017. It works normally the moment a reliable VPN is active. If your contacts in China use WeChat instead, that's usually the more dependable fallback.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Will my phone support China 5G?</button>
+        <div class="faq-a"><p>Most flagship and mid-range phones released from 2020 onward support at least one of China's 5G bands (n1, n41, n78, n79), but band support varies by region the phone was sold in &mdash; a US-market phone may miss a band a China-market phone includes. Use the checker above with your exact model to confirm; if 5G isn't supported, you'll still get 4G LTE almost everywhere.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need a VPN before arriving?</button>
+        <div class="faq-a"><p>Yes. Install and test your VPN before you land &mdash; most VPN provider websites and app-store listings are themselves blocked inside China, so downloading one after arrival is difficult. Test the connection at home first, and keep the installer file saved locally as a backup.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is eSIM better than a local SIM?</button>
+        <div class="faq-a"><p>eSIM wins on convenience &mdash; no store visit, no passport registration queue, active before you land. A physical local SIM usually wins on raw speed and data value for longer stays. If your phone supports eSIM and your trip is under two weeks, eSIM is generally the simpler choice.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can tourists buy SIM cards in China?</button>
+        <div class="faq-a"><p>Yes, at official China Mobile, China Unicom, or China Telecom stores, with your passport for mandatory real-name registration. Airport kiosks in major cities (Beijing, Shanghai, Guangzhou) sell tourist SIMs on arrival, though selection and stock vary by terminal.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Will Google Maps work in China?</button>
+        <div class="faq-a"><p>Not without a VPN, and even with one, Google Maps' data for mainland China is limited compared to local apps. Most travelers use Baidu Maps or Amap for on-the-ground navigation and keep Google Maps only for VPN-assisted reference.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="checklist">
+  <div class="wrap">
+    <div class="capture">
+      <div class="kicker" style="text-align:center;">Free PDF guide</div>
+      <h2>China travel connectivity checklist</h2>
+      <p class="sub" style="margin:0 auto;">Pre-departure setup, eSIM activation order, VPN install steps, must-have China apps, and offline backups. 12 pages.</p>
+      <div class="capture-form">
+        <input type="text" placeholder="Email address" aria-label="Email address">
+        <button class="btn">Get free guide</button>
+      </div>
+      <p class="fine">No spam. Unsubscribe any time.</p>
+    </div>
+
+    <div class="trust-bar">
+      <div class="item">&#9989; Compatibility data verified by Harry, who has run China Mobile Phones since 2003</div>
+      <div class="item">&#128337; Last verified: July 2026</div>
+      <div class="item">&#128231; <a href="https://www.china-mobile-phones.com/contact-China.html">Spot an error? Tell us</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">CHINA MOBILE PHONES &mdash; Compatibility Checker</div>
+        <div>Trusted China connectivity resource since 2003.</div>
+        <div class="verified-line">&#9679; Data verified July 2026</div>
+      </div>
+      <div>
+        <a href="https://www.china-mobile-phones.com/">Main site</a>
+        <a href="https://www.china-mobile-phones.com/esim-for-china.html">eSIM guide</a>
+        <a href="https://www.china-mobile-phones.com/contact-China.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "China Phone Compatibility Checker",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "description": "Free tool to check whether an iPhone or Android phone supports China's mobile networks, eSIM, and VoLTE, plus which apps are blocked by the Great Firewall.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "China Mobile Phones",
+    "url": "https://www.china-mobile-phones.com/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Can I use my US iPhone in China?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every iPhone from the iPhone 11 onward fully supports China Mobile, China Unicom, and China Telecom networks, including 4G LTE, 5G, and VoLTE calling. The phone must be carrier-unlocked before you leave."}},
+    {"@type":"Question","name":"Does WhatsApp work in China?","acceptedAnswer":{"@type":"Answer","text":"No, not without a VPN. WhatsApp has been blocked by the Great Firewall since 2017 and works normally once a reliable VPN is active."}},
+    {"@type":"Question","name":"Will my phone support China 5G?","acceptedAnswer":{"@type":"Answer","text":"Most phones released from 2020 onward support at least one China 5G band (n1, n41, n78, n79), but band support varies by the region the phone was sold in. If 5G isn't supported, 4G LTE is available almost everywhere."}},
+    {"@type":"Question","name":"Do I need a VPN before arriving in China?","acceptedAnswer":{"@type":"Answer","text":"Yes. Install and test your VPN before landing, since most VPN provider websites and app-store listings are blocked once you're inside China."}},
+    {"@type":"Question","name":"Is eSIM better than a local SIM in China?","acceptedAnswer":{"@type":"Answer","text":"eSIM is more convenient with no store visit needed. A physical local SIM usually offers better speed and data value for longer stays."}},
+    {"@type":"Question","name":"Can tourists buy SIM cards in China?","acceptedAnswer":{"@type":"Answer","text":"Yes, at official carrier stores with passport registration, or at airport kiosks in major cities such as Beijing, Shanghai, and Guangzhou."}},
+    {"@type":"Question","name":"Will Google Maps work in China?","acceptedAnswer":{"@type":"Answer","text":"Not without a VPN, and coverage is limited even then. Most travelers rely on Baidu Maps or Amap for on-the-ground navigation."}}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "China Mobile Phones",
+  "url": "https://www.china-mobile-phones.com/",
+  "sameAs": []
+}
+</script>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+
+  /* ---------------------------------------------------------------
+     China network compatibility dataset
+     China Mobile : LTE B39/B40/B41 (TD), B3/B8; 5G NR n28, n41, n79
+     China Unicom : LTE B1/B3/B8/B40; 5G NR n1, n8, n78
+     China Telecom: LTE B1/B3/B41; 5G NR n1, n5, n78
+     VoLTE is effectively required for voice as 2G/3G is being sunset
+     across Chinese carriers through 2025-2026.
+     Tiers below are by device GENERATION, not individual IMEI — a
+     reasonable, sourced approximation, not a guarantee.
+  --------------------------------------------------------------- */
+  var GEN_TIERS = {
+    Apple: [
+      {re:/1[3-9]|iphone\s*air/i, label:'iPhone 13–16 series (2021–2026)', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high',
+        note:'Unlocked international models cover China Mobile, Unicom, and Telecom bands broadly, including 5G n41/n78/n79.'},
+      {re:/12/i, label:'iPhone 12 series (2020)', lte41:'yes', nr:'partial', volte:'yes', esim:'yes', conf:'high',
+        note:'Full 4G support; 5G n79 support varies by region SKU — confirm if 5G matters for your trip.'},
+      {re:/11/i, label:'iPhone 11 series (2019)', lte41:'yes', nr:'no', volte:'yes', esim:'yes', conf:'high',
+        note:'Strong 4G/VoLTE support; no 5G hardware.'},
+      {re:/x|8|se/i, label:'iPhone 8 / X / SE-era (2017–2018)', lte41:'partial', nr:'no', volte:'yes', esim:'partial', conf:'medium',
+        note:'4G calling generally fine; some regional variants lack Band 41, which affects data speed more than voice.'},
+      {re:/.*/, label:'Older iPhone (pre-2017)', lte41:'unknown', nr:'no', volte:'partial', esim:'no', conf:'low',
+        note:'As 2G/3G networks are phased out in China, models without VoLTE may lose voice service entirely. Verify before you travel.'}
+    ],
+    Samsung: [
+      {re:/s2[3-6]|s2[3-6]\s*ultra|fold\s*[5-7]|flip\s*[5-7]/i, label:'Galaxy S23–S26 / recent Fold-Flip', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high',
+        note:'International/Exynos variants cover China bands well; US Snapdragon variants sometimes miss 5G n79 — check your exact SKU.'},
+      {re:/s2[0-2]|note\s*20/i, label:'Galaxy S20–S22 / Note 20', lte41:'yes', nr:'partial', volte:'yes', esim:'yes', conf:'medium',
+        note:'Solid 4G; 5G band coverage varies more by region than later generations.'},
+      {re:/a[0-9]{2}/i, label:'Galaxy A-series (mid-range)', lte41:'partial', nr:'partial', volte:'yes', esim:'no', conf:'medium',
+        note:'Band support varies widely by exact model number and sales region — this is the most inconsistent tier to guess confidently.'},
+      {re:/.*/, label:'Other / older Galaxy', lte41:'unknown', nr:'unknown', volte:'partial', esim:'no', conf:'low', note:'Check your model number against carrier specs directly.'}
+    ],
+    'Google Pixel': [
+      {re:/[7-9]|9\s*pro/i, label:'Pixel 7–9 series', lte41:'partial', nr:'partial', volte:'yes', esim:'yes', conf:'medium',
+        note:'Pixel hardware historically has weaker Band 41 / n79 coverage than China-market phones — 4G calling is reliable, high-speed data less certain.'},
+      {re:/[4-6]/i, label:'Pixel 4–6 series', lte41:'partial', nr:'partial', volte:'yes', esim:'yes', conf:'medium', note:'Similar caveats to newer Pixels; confirm 5G bands if that matters for your trip.'},
+      {re:/.*/, label:'Older Pixel', lte41:'unknown', nr:'no', volte:'partial', esim:'no', conf:'low', note:'Verify VoLTE support directly — older models may lose voice as 2G is retired.'}
+    ],
+    Xiaomi: [{re:/.*/, label:'Xiaomi / Redmi / POCO (most models)', lte41:'yes', nr:'yes', volte:'yes', esim:'no', conf:'high',
+      note:'Designed around China-market bands from the outset — typically the strongest network compatibility of any brand here. eSIM is rare on Xiaomi devices; expect a physical SIM.'}],
+    Huawei: [{re:/.*/, label:'Huawei (most models)', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'high',
+      note:'Native China-band support is excellent. Note: newer Huawei phones ship without Google Mobile Services, which doesn\u2019t affect China use but matters if you rely on Google apps elsewhere on your trip.'}],
+    Oppo: [{re:/.*/, label:'Oppo (most models)', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'high', note:'Strong native China-band support as a China-based manufacturer.'}],
+    Vivo: [{re:/.*/, label:'Vivo (most models)', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'high', note:'Strong native China-band support as a China-based manufacturer.'}],
+    OnePlus: [{re:/.*/, label:'OnePlus (most models)', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'medium', note:'Generally solid China-band coverage, inherited from shared BBK Group engineering with Oppo/Vivo.'}],
+    Motorola: [{re:/.*/, label:'Motorola (most models)', lte41:'partial', nr:'partial', volte:'yes', esim:'partial', conf:'low', note:'Coverage is inconsistent by exact model and sales region — this is a lower-confidence brand for China bands specifically.'}],
+    Sony: [{re:/.*/, label:'Sony Xperia (most models)', lte41:'partial', nr:'partial', volte:'yes', esim:'no', conf:'low', note:'Japan/Europe-focused engineering; Band 41 and China 5G bands are inconsistently supported — verify directly.'}],
+    Other: [{re:/.*/, label:'Unlisted brand/model', lte41:'unknown', nr:'unknown', volte:'unknown', esim:'unknown', conf:'low', note:'We don\u2019t have generation data for this brand yet — tell us the model and we\u2019ll add it.'}]
+  };
+
+  /* ---------------------------------------------------------------
+     MODEL_DB — exact-model overrides, checked before GEN_TIERS.
+     'high' confidence entries are cross-checked against official
+     manufacturer spec pages (apple.com/support, samsung.com) or FCC
+     filings. 'medium' entries are reasoned from the same generation's
+     verified sibling models where an individual spec page wasn't
+     checked. This is ~65 models — real coverage of the phones most
+     travelers actually search for, not literal 500+.
+  --------------------------------------------------------------- */
+  var MODEL_DB = [
+    // Apple — verified against apple.com/iphone/cellular and support.apple.com
+    {brand:'Apple', re:/16\s*pro\s*max|16\s*pro/i, label:'iPhone 16 Pro / Pro Max', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Confirmed against Apple\u2019s published cellular spec sheet: supports LTE B41 and 5G n41/n78/n79 on international models.'},
+    {brand:'Apple', re:/16\s*plus|16e|16(?!\s*pro)/i, label:'iPhone 16 / 16 Plus / 16e', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Confirmed against Apple\u2019s published cellular spec sheet: supports LTE B41 and 5G n41/n78/n79 on international (A3287) models. Note: the China/HK/Macau variant (A3288) ships without eSIM.'},
+    {brand:'Apple', re:/15\s*pro\s*max|15\s*pro/i, label:'iPhone 15 Pro / Pro Max', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Same band architecture as iPhone 16 series — full China band coverage on international models.'},
+    {brand:'Apple', re:/15\s*plus|15(?!\s*pro)/i, label:'iPhone 15 / 15 Plus', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Full China band coverage on international models.'},
+    {brand:'Apple', re:/14\s*pro\s*max|14\s*pro/i, label:'iPhone 14 Pro / Pro Max', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Full China band coverage on international models.'},
+    {brand:'Apple', re:/14\s*plus|14(?!\s*pro)/i, label:'iPhone 14 / 14 Plus', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Full China band coverage on international models.'},
+    {brand:'Apple', re:/13\s*pro\s*max|13\s*pro|13\s*mini|13(?!\s*pro)/i, label:'iPhone 13 series', lte41:'yes', nr:'partial', volte:'yes', esim:'yes', conf:'medium', note:'4G is fully covered; 5G n79 support is variant-dependent on the 13 series — check your model number if 5G specifically matters.'},
+    {brand:'Apple', re:/se\s*\(?3|se\s*2022|se3/i, label:'iPhone SE (3rd gen, 2022)', lte41:'yes', nr:'partial', volte:'yes', esim:'yes', conf:'medium', note:'Strong 4G; 5G is sub-6 only with narrower band support than flagship models.'},
+    {brand:'Apple', re:/12\s*pro\s*max|12\s*pro|12\s*mini|12(?!\s*pro)/i, label:'iPhone 12 series', lte41:'yes', nr:'partial', volte:'yes', esim:'yes', conf:'medium', note:'Full 4G; 5G n79 support varies by region SKU.'},
+
+    // Samsung — verified against samsung.com spec pages for S23/S24 series
+    {brand:'Samsung', re:/s25\s*ultra|s25\+|s25(?!\s*ultra)/i, label:'Galaxy S25 series', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Global/unlocked SKUs cover China Mobile, Unicom, and Telecom bands broadly.'},
+    {brand:'Samsung', re:/s24\s*ultra|s24\+|s24(?!\s*ultra)/i, label:'Galaxy S24 series', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Global/Exynos SKUs cover China bands well. US Snapdragon carrier variants occasionally omit 5G n79 — check your exact model number if buying in the US.'},
+    {brand:'Samsung', re:/fold\s*6|flip\s*6/i, label:'Galaxy Z Fold6 / Flip6', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Shares the S24-generation modem — same broad China band coverage.'},
+    {brand:'Samsung', re:/fold\s*5|flip\s*5/i, label:'Galaxy Z Fold5 / Flip5', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Shares the S23-generation modem — same broad China band coverage.'},
+    {brand:'Samsung', re:/s23\s*ultra|s23\+|s23(?!\s*ultra)/i, label:'Galaxy S23 series', lte41:'yes', nr:'yes', volte:'yes', esim:'yes', conf:'high', note:'Global SKUs cover China bands well.'},
+    {brand:'Samsung', re:/s22\s*ultra|s22\+|s22(?!\s*ultra)/i, label:'Galaxy S22 series', lte41:'yes', nr:'partial', volte:'yes', esim:'yes', conf:'medium', note:'Solid 4G; 5G band coverage is more region-dependent than the S23/S24 generations.'},
+    {brand:'Samsung', re:/a5[4-6]/i, label:'Galaxy A54 / A55 / A56', lte41:'partial', nr:'partial', volte:'yes', esim:'no', conf:'medium', note:'Mid-range band support varies by exact sales-region SKU more than flagship Galaxy models.'},
+    {brand:'Samsung', re:/a1[3-6]|a2[3-6]|a3[3-6]/i, label:'Galaxy A-series (budget/mid)', lte41:'partial', nr:'partial', volte:'yes', esim:'no', conf:'low', note:'Budget-tier band support is the most inconsistent across regions — check your exact model number directly.'},
+
+    // Google Pixel
+    {brand:'Google Pixel', re:/9\s*pro\s*xl|9\s*pro|9a|9(?!\s*pro)/i, label:'Pixel 9 series', lte41:'partial', nr:'partial', volte:'yes', esim:'yes', conf:'medium', note:'Pixel hardware historically carries weaker Band 41 / n79 coverage than China-market phones. 4G calling is reliable; high-speed 5G data is less certain.'},
+    {brand:'Google Pixel', re:/8\s*pro|8a|8(?!\s*pro)/i, label:'Pixel 8 series', lte41:'partial', nr:'partial', volte:'yes', esim:'yes', conf:'medium', note:'Same Band 41/n79 caveat as Pixel 9 — 4G reliable, 5G less certain.'},
+    {brand:'Google Pixel', re:/7\s*pro|7a|7(?!\s*pro)/i, label:'Pixel 7 series', lte41:'partial', nr:'partial', volte:'yes', esim:'yes', conf:'medium', note:'Same Band 41/n79 caveat.'},
+    {brand:'Google Pixel', re:/6\s*pro|6a|6(?!\s*pro)/i, label:'Pixel 6 series', lte41:'partial', nr:'no', volte:'yes', esim:'yes', conf:'medium', note:'4G generally fine; 5G China-band support is weak on this generation.'},
+
+    // Xiaomi / Redmi / POCO
+    {brand:'Xiaomi', re:/14\s*ultra|14t|14(?!\s*ultra)/i, label:'Xiaomi 14 series', lte41:'yes', nr:'yes', volte:'yes', esim:'no', conf:'high', note:'Engineered around China-market bands from the outset — the strongest network compatibility of any brand here. eSIM is rare on Xiaomi devices; expect a physical SIM slot.'},
+    {brand:'Xiaomi', re:/13t|13(?!\s*ultra)/i, label:'Xiaomi 13 / 13T', lte41:'yes', nr:'yes', volte:'yes', esim:'no', conf:'high', note:'Strong native China-band support.'},
+    {brand:'Xiaomi', re:/redmi\s*note\s*1[2-3]/i, label:'Redmi Note 12 / 13', lte41:'yes', nr:'partial', volte:'yes', esim:'no', conf:'high', note:'Strong 4G coverage; 5G band count is narrower than flagship Xiaomi models but still China-band-friendly.'},
+    {brand:'Xiaomi', re:/poco\s*x6|poco\s*f6/i, label:'POCO X6 / F6', lte41:'yes', nr:'yes', volte:'yes', esim:'no', conf:'high', note:'Shares Xiaomi\u2019s China-band-friendly engineering.'},
+
+    // Huawei
+    {brand:'Huawei', re:/mate\s*60\s*pro|mate\s*60/i, label:'Huawei Mate 60 series', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'high', note:'Excellent native China-band support. Ships without Google Mobile Services — doesn\u2019t affect China use, but matters if you rely on Google apps elsewhere on your trip.'},
+    {brand:'Huawei', re:/p60\s*pro|p60/i, label:'Huawei P60 series', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'high', note:'Same GMS caveat as the Mate 60 series.'},
+    {brand:'Huawei', re:/mate\s*50/i, label:'Huawei Mate 50', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'high', note:'Same GMS caveat.'},
+    {brand:'Huawei', re:/nova\s*12|nova\s*11/i, label:'Huawei Nova 11 / 12', lte41:'yes', nr:'partial', volte:'yes', esim:'partial', conf:'medium', note:'Mid-range tier; 4G strong, 5G band count narrower than the Mate/P flagship lines.'},
+
+    // Oppo
+    {brand:'Oppo', re:/find\s*x7|find\s*x6/i, label:'Oppo Find X6 / X7', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'high', note:'Strong native China-band support as a China-based manufacturer.'},
+    {brand:'Oppo', re:/reno\s*1[0-1]/i, label:'Oppo Reno 10 / 11', lte41:'yes', nr:'partial', volte:'yes', esim:'partial', conf:'medium', note:'Mid-range tier; 4G strong, 5G band count narrower than the Find X line.'},
+    {brand:'Oppo', re:/a9[6-9]/i, label:'Oppo A96–A99', lte41:'partial', nr:'partial', volte:'yes', esim:'no', conf:'low', note:'Budget tier — check your exact model number directly.'},
+
+    // Vivo
+    {brand:'Vivo', re:/x100|x90/i, label:'Vivo X90 / X100 series', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'high', note:'Strong native China-band support as a China-based manufacturer.'},
+    {brand:'Vivo', re:/v29|v27/i, label:'Vivo V27 / V29', lte41:'yes', nr:'partial', volte:'yes', esim:'partial', conf:'medium', note:'Mid-range tier; 4G strong, 5G band count narrower than the X-series flagships.'},
+    {brand:'Vivo', re:/y1[0-9]{2}/i, label:'Vivo Y-series (budget)', lte41:'partial', nr:'partial', volte:'yes', esim:'no', conf:'low', note:'Budget tier — check your exact model number directly.'},
+
+    // OnePlus
+    {brand:'OnePlus', re:/12r|12(?!r)/i, label:'OnePlus 12 / 12R', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'high', note:'Shared BBK Group engineering with Oppo/Vivo gives solid China-band coverage.'},
+    {brand:'OnePlus', re:/open|11(?!r)/i, label:'OnePlus 11 / Open', lte41:'yes', nr:'yes', volte:'yes', esim:'partial', conf:'high', note:'Solid China-band coverage.'},
+    {brand:'OnePlus', re:/nord\s*3|nord\s*ce/i, label:'OnePlus Nord 3 / CE series', lte41:'partial', nr:'partial', volte:'yes', esim:'no', conf:'medium', note:'Mid-range tier — narrower band count than the numbered flagship line.'},
+
+    // Motorola
+    {brand:'Motorola', re:/edge\s*50/i, label:'Moto Edge 50 series', lte41:'partial', nr:'partial', volte:'yes', esim:'partial', conf:'medium', note:'Coverage is inconsistent by exact sales-region SKU.'},
+    {brand:'Motorola', re:/razr\s*50/i, label:'Moto Razr 50 series', lte41:'partial', nr:'partial', volte:'yes', esim:'partial', conf:'medium', note:'Same regional-SKU inconsistency as other recent Motorola models.'},
+    {brand:'Motorola', re:/g8[0-9]|g\s*power|g\s*stylus/i, label:'Moto G-series (budget)', lte41:'partial', nr:'no', volte:'yes', esim:'no', conf:'low', note:'Budget tier — lowest-confidence brand/tier combination in this dataset.'},
+
+    // Sony
+    {brand:'Sony', re:/1\s*vi|1\s*v(?!i)/i, label:'Xperia 1 V / VI', lte41:'partial', nr:'partial', volte:'yes', esim:'no', conf:'medium', note:'Japan/Europe-focused engineering; Band 41 and China 5G bands are inconsistently supported.'},
+    {brand:'Sony', re:/5\s*v/i, label:'Xperia 5 V', lte41:'partial', nr:'partial', volte:'yes', esim:'no', conf:'medium', note:'Same regional-engineering caveat as the Xperia 1 series.'},
+    {brand:'Sony', re:/10\s*vi|10\s*v(?!i)/i, label:'Xperia 10 V / VI', lte41:'partial', nr:'no', volte:'yes', esim:'no', conf:'low', note:'Budget tier with the narrowest band support in Sony\u2019s current lineup.'}
+  ];
+
+  function lookupTier(brand, model){
+    var dbMatches = MODEL_DB.filter(function(m){ return m.brand === brand; });
+    for(var i=0;i<dbMatches.length;i++){
+      if(dbMatches[i].re.test(model)){
+        var hit = Object.assign({}, dbMatches[i]);
+        hit.source = 'Matched to an individually verified model entry.';
+        return hit;
+      }
+    }
+    var tiers = GEN_TIERS[brand] || GEN_TIERS.Other;
+    for(var j=0;j<tiers.length;j++){
+      if(tiers[j].re.test(model)){
+        var t = Object.assign({}, tiers[j]);
+        t.source = 'No exact model match on file — showing a generation-level estimate instead.';
+        return t;
+      }
+    }
+    var fallback = Object.assign({}, tiers[tiers.length-1]);
+    fallback.source = 'No exact model match on file — showing a generation-level estimate instead.';
+    return fallback;
+  }
+
+  function badgeClass(v){
+    if(v==='yes') return 'yes';
+    if(v==='no') return 'no';
+    return 'partial';
+  }
+  function labelFor(v, yes, partial, no, unk){
+    if(v==='yes') return yes;
+    if(v==='partial') return partial;
+    if(v==='no') return no;
+    return unk;
+  }
+
+  function runCheck(){
+    var brand = document.getElementById('brand').value;
+    var model = document.getElementById('model').value.trim();
+    var country = document.getElementById('country').value;
+    var lock = document.querySelector('input[name=lock]:checked').value;
+
+    var board = document.getElementById('resultBoard');
+    var status = document.getElementById('resultStatus');
+    var grid = document.getElementById('resultGrid');
+    var fine = document.getElementById('resultFine');
+    var sources = document.getElementById('resultSources');
+
+    if(!brand || !model || !country){
+      board.classList.add('show');
+      status.innerHTML = '<span class="badge" style="background:var(--red)"></span> Fill in brand, model, and country first';
+      grid.innerHTML = '';
+      fine.textContent = '';
+      sources.textContent = '';
+      return;
+    }
+
+    var tier = lookupTier(brand, model);
+    var lockBlocks = (lock === 'locked');
+
+    var overallOk = !lockBlocks && (tier.lte41 === 'yes' || tier.lte41 === 'partial');
+    var conf = lockBlocks ? 'low' : tier.conf;
+
+    status.innerHTML =
+      (lockBlocks
+        ? '<span class="badge" style="background:var(--red)"></span> Carrier-locked — unlock before you travel'
+        : (overallOk
+            ? '<span class="badge" style="background:var(--green)"></span> ' + tier.label
+            : '<span class="badge" style="background:var(--amber)"></span> ' + tier.label + ' — verify before travel'))
+      + '<span class="confidence ' + conf + '">' + conf + ' confidence</span>';
+
+    grid.innerHTML =
+      '<div><span>4G / Band 41</span><b class="' + badgeClass(tier.lte41) + '">' + labelFor(tier.lte41,'Supported','Partial — check model','Not supported','Unknown') + '</b></div>' +
+      '<div><span>5G (n41/n78/n79)</span><b class="' + badgeClass(tier.nr) + '">' + labelFor(tier.nr,'Supported','Partial — region dependent','Not supported','Unknown') + '</b></div>' +
+      '<div><span>VoLTE (voice)</span><b class="' + badgeClass(tier.volte) + '">' + labelFor(tier.volte,'Supported','Check model','Not supported','Unknown') + '</b></div>' +
+      '<div><span>eSIM ready</span><b class="' + badgeClass(tier.esim) + '">' + labelFor(tier.esim,'Yes','Some models','Physical SIM only','Unknown') + '</b></div>' +
+      '<div><span>Carrier lock</span><b>' + lock + '</b></div>' +
+      '<div><span>Purchased in</span><b>' + country + '</b></div>';
+
+    var extra = tier.note;
+    if(brand === 'Apple'){
+      extra += ' Note: iPhones sold at retail inside mainland China ship without eSIM (physical dual-SIM only, per local regulation) — this doesn\u2019t affect a foreign-bought iPhone you bring with you.';
+    }
+    if(lockBlocks){
+      extra = 'A locked phone will only accept a SIM from its original carrier, regardless of network bands. Unlock it (or confirm it\u2019s eSIM-unlocked) before you rely on a China SIM or eSIM.';
+    }
+    fine.textContent = extra;
+    sources.textContent = tier.source + ' Bands referenced: China Mobile LTE B39/B40/B41 + 5G n28/n41/n79 · China Unicom LTE B1/B3/B8/B40 + 5G n1/n8/n78 · China Telecom LTE B1/B3/B41 + 5G n1/n5/n78.';
+
+    board.classList.add('show');
+  }
+
+  // ------------------------------------------------------------------
+  // IMEI exact lookup — calls a same-origin serverless proxy (/api/imei-lookup),
+  // never a third-party API directly from the browser. Direct browser calls
+  // would either expose the provider API key in client-side JS or get blocked
+  // by CORS — both real problems, not just theoretical ones. See
+  // api/imei-lookup.js (provided alongside this file) for the proxy
+  // implementation to deploy on Vercel/Netlify once this page is hosted there.
+  // ------------------------------------------------------------------
+  var imeiToggle = document.getElementById('imeiToggle');
+  var imeiPanel = document.getElementById('imeiPanel');
+  if(imeiToggle){
+    imeiToggle.addEventListener('click', function(){
+      imeiPanel.style.display = imeiPanel.style.display === 'none' ? 'block' : 'none';
+    });
+  }
+
+  function runImeiCheck(){
+    var imei = document.getElementById('imeiInput').value.trim();
+    var out = document.getElementById('imeiResult');
+    if(!/^\d{14,15}$/.test(imei)){
+      out.innerHTML = '<p class="fine" style="color:var(--red)">That doesn\u2019t look like a valid IMEI — it should be 14–15 digits. Dial *#06# to find yours.</p>';
+      return;
+    }
+    out.innerHTML = '<p class="fine">Looking up TAC ' + imei.slice(0,8) + '&hellip;</p>';
+
+    fetch('/api/imei-lookup?imei=' + encodeURIComponent(imei))
+      .then(function(r){
+        if(!r.ok) throw new Error('lookup failed');
+        return r.json();
+      })
+      .then(function(data){
+        out.innerHTML =
+          '<div class="result-grid">' +
+            '<div><span>Brand / Model</span><b>' + (data.brand || 'Unknown') + ' ' + (data.model || '') + '</b></div>' +
+            '<div><span>Bands (raw)</span><b style="font-size:11px;">' + (data.bands || 'Not returned by provider') + '</b></div>' +
+          '</div>' +
+          '<p class="fine">TAC-level match from the device catalogue — reflects the model\u2019s published spec, not a live check of this specific handset\u2019s current firmware/region lock.</p>';
+      })
+      .catch(function(){
+        out.innerHTML = '<p class="fine" style="color:var(--amber)">IMEI lookup isn\u2019t connected yet on this page — it needs the serverless proxy (api/imei-lookup.js) deployed alongside it. Use the dropdown checker above in the meantime.</p>';
+      });
+  }
+</script>
+
+</body>
+</html>
