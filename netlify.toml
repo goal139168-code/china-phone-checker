@@ -1,0 +1,12 @@
+# netlify.toml
+# Tells Netlify where to find your functions, and redirects the friendly
+# /api/imei-lookup URL (already used in china-phone-checker.html's JS)
+# to the real Netlify Functions path so nothing in the frontend needs editing.
+
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/api/imei-lookup"
+  to = "/.netlify/functions/imei-lookup"
+  status = 200
