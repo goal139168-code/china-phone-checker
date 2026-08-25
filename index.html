@@ -852,6 +852,21 @@
     });
   }
 
+  function normalizeImeiBrand(rawBrand){
+    var b = (rawBrand || '').toLowerCase();
+    if(b.indexOf('apple') > -1 || b.indexOf('iphone') > -1) return 'Apple';
+    if(b.indexOf('samsung') > -1) return 'Samsung';
+    if(b.indexOf('google') > -1 || b.indexOf('pixel') > -1) return 'Google Pixel';
+    if(b.indexOf('redmi') > -1 || b.indexOf('poco') > -1 || b.indexOf('xiaomi') > -1) return 'Xiaomi';
+    if(b.indexOf('huawei') > -1) return 'Huawei';
+    if(b.indexOf('oppo') > -1) return 'Oppo';
+    if(b.indexOf('vivo') > -1) return 'Vivo';
+    if(b.indexOf('oneplus') > -1) return 'OnePlus';
+    if(b.indexOf('motorola') > -1 || b.indexOf('moto') > -1) return 'Motorola';
+    if(b.indexOf('sony') > -1 || b.indexOf('xperia') > -1) return 'Sony';
+    return 'Other';
+  }
+
   function runImeiCheck(){
     var imei = document.getElementById('imeiInput').value.trim();
     var out = document.getElementById('imeiResult');
@@ -859,7 +874,7 @@
       out.innerHTML = '<p class="fine" style="color:var(--red)">That doesn\u2019t look like a valid IMEI — it should be 14–15 digits. Dial *#06# to find yours.</p>';
       return;
     }
-    out.innerHTML = '<p class="fine">Looking up TAC ' + imei.slice(0,8) + '&hellip;</p>';
+    out.innerHTML = '<p class="fine">Looking up IMEI ' + imei + '&hellip;</p>';
 
     fetch('/api/imei-lookup?imei=' + encodeURIComponent(imei))
       .then(function(r){
@@ -867,15 +882,29 @@
         return r.json();
       })
       .then(function(data){
+        if(data.error || !data.brand){
+          out.innerHTML = '<p class="fine" style="color:var(--amber)">' + (data.error || 'IMEI not recognized.') + ' Use the dropdown checker above instead.</p>';
+          return;
+        }
+        var mappedBrand = normalizeImeiBrand(data.brand);
+        var tier = lookupTier(mappedBrand, data.model || '');
+
         out.innerHTML =
-          '<div class="result-grid">' +
-            '<div><span>Brand / Model</span><b>' + (data.brand || 'Unknown') + ' ' + (data.model || '') + '</b></div>' +
-            '<div><span>Bands (raw)</span><b style="font-size:11px;">' + (data.bands || 'Not returned by provider') + '</b></div>' +
+          '<div class="result-status" style="margin-bottom:12px;">' +
+            '<span class="badge" style="background:var(--green)"></span> ' +
+            data.brand + ' ' + data.model +
+            '<span class="confidence ' + tier.conf + '">' + tier.conf + ' confidence</span>' +
           '</div>' +
-          '<p class="fine">TAC-level match from the device catalogue — reflects the model\u2019s published spec, not a live check of this specific handset\u2019s current firmware/region lock.</p>';
+          '<div class="result-grid">' +
+            '<div><span>4G / Band 41</span><b class="' + badgeClass(tier.lte41) + '">' + labelFor(tier.lte41,'Supported','Partial — check model','Not supported','Unknown') + '</b></div>' +
+            '<div><span>5G (n41/n78/n79)</span><b class="' + badgeClass(tier.nr) + '">' + labelFor(tier.nr,'Supported','Partial — region dependent','Not supported','Unknown') + '</b></div>' +
+            '<div><span>VoLTE (voice)</span><b class="' + badgeClass(tier.volte) + '">' + labelFor(tier.volte,'Supported','Check model','Not supported','Unknown') + '</b></div>' +
+            '<div><span>eSIM ready</span><b class="' + badgeClass(tier.esim) + '">' + labelFor(tier.esim,'Yes','Some models','Physical SIM only','Unknown') + '</b></div>' +
+          '</div>' +
+          '<p class="fine">' + tier.note + ' Identified from your actual IMEI via ImeiCheck.com\u2019s device database, then matched against our own band dataset — ' + tier.source.toLowerCase() + '</p>';
       })
       .catch(function(){
-        out.innerHTML = '<p class="fine" style="color:var(--amber)">IMEI lookup isn\u2019t connected yet on this page — it needs the serverless proxy (api/imei-lookup.js) deployed alongside it. Use the dropdown checker above in the meantime.</p>';
+        out.innerHTML = '<p class="fine" style="color:var(--amber)">IMEI lookup isn\u2019t connected right now. Use the dropdown checker above in the meantime.</p>';
       });
   }
 </script>
