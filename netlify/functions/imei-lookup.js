@@ -44,10 +44,20 @@ export default async (req, context) => {
   try {
     const providerUrl = `https://alpha.imeicheck.com/api/modelBrandName?imei=${encodeURIComponent(imei)}&key=${apiKey}&format=json`;
 
-    const providerRes = await fetch(providerUrl);
+    const providerRes = await fetch(providerUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; ChinaMobilePhonesChecker/1.0)',
+        'Accept': 'application/json'
+      }
+    });
     if (!providerRes.ok) {
+      const bodyText = await providerRes.text();
       return new Response(
-        JSON.stringify({ error: 'Provider lookup failed.' }),
+        JSON.stringify({
+          error: 'Provider lookup failed.',
+          providerStatus: providerRes.status,
+          providerBody: bodyText.slice(0, 500)
+        }),
         { status: 502, headers: { 'Content-Type': 'application/json' } }
       );
     }
