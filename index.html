@@ -5,7 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Will My Phone Work in China? Free Compatibility Checker</title>
 <meta name="description" content="Check in seconds if your iPhone or Android phone works in China — 65+ verified models, eSIM comparison, blocked apps list, and VPN guide. Updated 2026.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<!-- Open Graph / social sharing preview -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://check.china-mobile-phones.com/">
+<meta property="og:site_name" content="China Mobile Phones">
+<meta property="og:title" content="Will My Phone Work in China? Free Compatibility Checker">
+<meta property="og:description" content="Check in seconds if your iPhone or Android phone works in China — 65+ verified models, eSIM comparison, blocked apps list, and VPN guide.">
+<meta property="og:image" content="https://check.china-mobile-phones.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Will My Phone Work in China? Free Compatibility Checker">
+<meta name="twitter:description" content="Check in seconds if your iPhone or Android phone works in China — 65+ verified models, eSIM comparison, blocked apps list, and VPN guide.">
+<meta name="twitter:image" content="https://check.china-mobile-phones.com/og-image.png"><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -197,6 +213,22 @@
   td.dim{color:var(--paper-dim);}
   tr:last-child td{border-bottom:none;}
   .table-wrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px;}
+
+  /* VPN mobile cards — shown instead of the table below 640px so nothing
+     needs horizontal scrolling on a phone. */
+  .vpn-cards{display:none;flex-direction:column;gap:12px;}
+  .vpn-card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px 18px;}
+  .vpn-card .vpn-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+  .vpn-card .vpn-name{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--paper);}
+  .vpn-card .vpn-price{font-family:var(--mono);font-size:13px;color:var(--amber);}
+  .vpn-card .vpn-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-top:1px solid var(--line);}
+  .vpn-card .vpn-row span{color:var(--paper-dim);}
+  .vpn-card .vpn-row b{color:var(--paper);font-weight:500;text-align:right;}
+  .vpn-card a.btn{display:block;text-align:center;margin-top:12px;padding:10px;font-size:13px;}
+  @media (max-width:640px){
+    .table-wrap{display:none;}
+    .vpn-cards{display:flex;}
+  }
   .table-wrap table{min-width:640px;}
 
   /* ---------- FAQ ---------- */
@@ -275,7 +307,7 @@
       <a class="btn btn-ghost" href="#esim">Compare eSIM options</a>
     </div>
     <div class="board">
-      <div class="flap"><span class="led"></span> <b>12 major brands</b>, generation-verified</div>
+      <div class="flap"><span class="led"></span> <b>65+ models</b>, individually verified</div>
       <div class="flap"><span class="led"></span> Verified <b>Jul 2026</b></div>
       <div class="flap"><span class="led"></span> No signup required</div>
       <div class="flap"><span class="led"></span> By <b>China Mobile Phones</b> &middot; est. 2003</div>
@@ -416,7 +448,7 @@
         <div class="kv"><span>Data</span><b>1 GB / 7 days</b></div>
         <div class="kv"><span>Speed</span><b>4G / 5G</b></div>
         <div class="kv gfw"><span>Bypasses firewall</span><b>No &mdash; use VPN</b></div>
-        <a class="btn" href="https://www.airalo.com/esim">View deal</a>
+        <a class="btn" href="https://www.airalo.com/esim" rel="noopener" target="_blank">View deal</a>
       </div>
       <div class="esim-card pick">
         <span class="pick-tag">Editor's pick</span>
@@ -426,7 +458,7 @@
         <div class="kv"><span>Data</span><b>Unlimited / 5 days</b></div>
         <div class="kv"><span>Speed</span><b>4G</b></div>
         <div class="kv gfw"><span>Bypasses firewall</span><b>Yes</b></div>
-        <a class="btn" href="https://holafly.sjv.io/c/7329574/3856277/24764">View deal</a>
+        <a class="btn" href="https://holafly.sjv.io/c/7329574/3856277/24764" rel="sponsored noopener" target="_blank">View deal</a>
       </div>
       <div class="esim-card">
         <h4>Nomad</h4>
@@ -435,7 +467,7 @@
         <div class="kv"><span>Data</span><b>3 GB / 30 days</b></div>
         <div class="kv"><span>Speed</span><b>4G / 5G</b></div>
         <div class="kv gfw"><span>Bypasses firewall</span><b>No &mdash; use VPN</b></div>
-        <a class="btn" href="https://www.nomadesim.com/">View deal</a>
+        <a class="btn" href="https://www.nomadesim.com/" rel="noopener" target="_blank">View deal</a>
       </div>
       <div class="esim-card">
         <h4>China Mobile HK</h4>
@@ -444,7 +476,7 @@
         <div class="kv"><span>Data</span><b>5 GB / 8 days</b></div>
         <div class="kv"><span>Speed</span><b>4G / 5G</b></div>
         <div class="kv gfw"><span>Bypasses firewall</span><b>Yes</b></div>
-        <a class="btn" href="https://esim.cmlink.com/en_US">View deal</a>
+        <a class="btn" href="https://esim.cmlink.com/en_US" rel="noopener" target="_blank">View deal</a>
       </div>
       <div class="esim-card">
         <h4>GigSky</h4>
@@ -453,7 +485,7 @@
         <div class="kv"><span>Data</span><b>2 GB / 15 days</b></div>
         <div class="kv"><span>Speed</span><b>4G</b></div>
         <div class="kv gfw"><span>Bypasses firewall</span><b>No &mdash; use VPN</b></div>
-        <a class="btn" href="https://www.gigsky.com/">View deal</a>
+        <a class="btn" href="https://www.gigsky.com/" rel="noopener" target="_blank">View deal</a>
       </div>
       <div class="esim-card">
         <h4>Local China SIM</h4>
@@ -481,12 +513,43 @@
           <tr><th>VPN</th><th>Price</th><th>Speed</th><th>China reliability</th><th>Best for</th><th></th></tr>
         </thead>
         <tbody>
-          <tr><td><b>NordVPN</b></td><td>$3.99/mo</td><td>Excellent</td><td class="dim">Most reliable in China</td><td class="dim">Best value</td><td><a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=155062&url_id=902">View</a></td></tr>
-          <tr><td><b>ExpressVPN</b></td><td>$6.67/mo</td><td>Excellent</td><td class="dim">Highly reliable</td><td class="dim">Best overall for travelers</td><td><a href="https://www.expressvpn.com/">View</a></td></tr>
-          <tr><td><b>Astrill</b></td><td>$15/mo</td><td>Very good</td><td class="dim">Reliable (obfuscated)</td><td class="dim">Expats / long-stay</td><td><a href="https://www.astrill.com/">View</a></td></tr>
-          <tr><td><b>Surfshark</b></td><td>$2.49/mo</td><td>Good</td><td class="dim">Works (NoBorders mode)</td><td class="dim">Budget travelers</td><td><a href="https://surfshark.com/">View</a></td></tr>
+          <tr><td><b>NordVPN</b></td><td>$3.99/mo</td><td>Excellent</td><td class="dim">Most reliable in China</td><td class="dim">Best value</td><td><a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=155062&url_id=902" rel="sponsored noopener" target="_blank">View</a></td></tr>
+          <tr><td><b>ExpressVPN</b></td><td>$6.67/mo</td><td>Excellent</td><td class="dim">Highly reliable</td><td class="dim">Best overall for travelers</td><td><a href="https://www.expressvpn.com/" rel="noopener" target="_blank">View</a></td></tr>
+          <tr><td><b>Astrill</b></td><td>$15/mo</td><td>Very good</td><td class="dim">Reliable (obfuscated)</td><td class="dim">Expats / long-stay</td><td><a href="https://www.astrill.com/" rel="noopener" target="_blank">View</a></td></tr>
+          <tr><td><b>Surfshark</b></td><td>$2.49/mo</td><td>Good</td><td class="dim">Works (NoBorders mode)</td><td class="dim">Budget travelers</td><td><a href="https://surfshark.com/" rel="noopener" target="_blank">View</a></td></tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="vpn-cards">
+      <div class="vpn-card">
+        <div class="vpn-head"><span class="vpn-name">NordVPN</span><span class="vpn-price">$3.99/mo</span></div>
+        <div class="vpn-row"><span>Speed</span><b>Excellent</b></div>
+        <div class="vpn-row"><span>China reliability</span><b>Most reliable in China</b></div>
+        <div class="vpn-row"><span>Best for</span><b>Best value</b></div>
+        <a class="btn" href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=155062&url_id=902" rel="sponsored noopener" target="_blank">View</a>
+      </div>
+      <div class="vpn-card">
+        <div class="vpn-head"><span class="vpn-name">ExpressVPN</span><span class="vpn-price">$6.67/mo</span></div>
+        <div class="vpn-row"><span>Speed</span><b>Excellent</b></div>
+        <div class="vpn-row"><span>China reliability</span><b>Highly reliable</b></div>
+        <div class="vpn-row"><span>Best for</span><b>Best overall for travelers</b></div>
+        <a class="btn" href="https://www.expressvpn.com/" rel="noopener" target="_blank">View</a>
+      </div>
+      <div class="vpn-card">
+        <div class="vpn-head"><span class="vpn-name">Astrill</span><span class="vpn-price">$15/mo</span></div>
+        <div class="vpn-row"><span>Speed</span><b>Very good</b></div>
+        <div class="vpn-row"><span>China reliability</span><b>Reliable (obfuscated)</b></div>
+        <div class="vpn-row"><span>Best for</span><b>Expats / long-stay</b></div>
+        <a class="btn" href="https://www.astrill.com/" rel="noopener" target="_blank">View</a>
+      </div>
+      <div class="vpn-card">
+        <div class="vpn-head"><span class="vpn-name">Surfshark</span><span class="vpn-price">$2.49/mo</span></div>
+        <div class="vpn-row"><span>Speed</span><b>Good</b></div>
+        <div class="vpn-row"><span>China reliability</span><b>Works (NoBorders mode)</b></div>
+        <div class="vpn-row"><span>Best for</span><b>Budget travelers</b></div>
+        <a class="btn" href="https://surfshark.com/" rel="noopener" target="_blank">View</a>
+      </div>
     </div>
   </div>
 </section>
