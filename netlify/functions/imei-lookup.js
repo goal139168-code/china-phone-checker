@@ -42,7 +42,7 @@ export default async (req, context) => {
   }
 
   try {
-    const providerUrl = `https://alpha.imeicheck.com/api/modelBrandName?imei=${encodeURIComponent(imei)}&key=${apiKey}&format=json`;
+    const providerUrl = `https://alpha.imeicheck.com/api/free_with_key/modelBrandName?key=${apiKey}&imei=${encodeURIComponent(imei)}&format=json`;
 
     const providerRes = await fetch(providerUrl, {
       headers: {
